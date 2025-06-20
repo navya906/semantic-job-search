@@ -9,7 +9,6 @@ import faiss
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# Load once
 df, index, model = job_data_loader.load_and_prepare_data()
 
 def query_gemini(prompt):
@@ -71,7 +70,6 @@ def search_jobs_with_summary(user_query, k=5):
     query_vec = model.encode([full_query], convert_to_numpy=True)
     query_vec = normalize(query_vec, axis=1)
 
-    # 🔎 Search
     distances, indices = temp_index.search(query_vec, k)
 
     if len(indices[0]) == 0 or all(d == 0.0 for d in distances[0]):
@@ -79,7 +77,6 @@ def search_jobs_with_summary(user_query, k=5):
 
     jobs = df_filtered.iloc[indices[0]].to_dict(orient='records')
 
-    # 📄 Prepare Gemini context
     context = "\n\n".join(
         f"{j['job_title']} at {j['company_name']} ({j['company_location']}), "
         f"${j['salary_usd']}, {j['experience_desc']}, {j['employment_type']} type, {j['remote_ratio']}% remote."
