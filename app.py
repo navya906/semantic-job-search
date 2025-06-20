@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from job_data_loader import load_and_prepare_data
-from main import search_jobs_with_summary
+from main import search_jobs_with_summary 
 
 app = Flask(__name__)
 
@@ -8,7 +8,6 @@ app = Flask(__name__)
 df, index, model = load_and_prepare_data()
 
 
-@app.route('/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def index():
     results = []
@@ -23,7 +22,6 @@ def index():
             summary = f"⚠️ Something went wrong: {str(e)}"
 
     return render_template('index.html', query=query, results=results, summary=summary)
-
 
 
 if __name__ == '__main__':
