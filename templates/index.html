@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Job Search: Discover Opportunities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #0056b3; /* Darker professional blue */
+            --primary-hover-color: #003f80; /* Even darker for hover */
+            --background-color: #f8f9fa; /* Light grey background */
+            --card-background: #ffffff;
+            --text-color: #212529; /* Darker grey for primary text, better contrast */
+            --light-text-color: #495057; /* Slightly darker muted grey for secondary text */
+            --border-color: #dee2e6;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --summary-background: #eaf6ff; /* Lighter blue for summary */
+            --summary-border: #b3d7ff;
+            --accent-green: #28a745; /* For salary */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.65; /* Increased for better line separation */
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased; /* Smoother font rendering on WebKit browsers */
+            -moz-osx-font-smoothing: grayscale; /* Smoother font rendering on Firefox */
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 40px;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+        }
+
+        /* Headings */
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 2.5em;
+            letter-spacing: -0.02em; /* Slight letter spacing adjustment for headings */
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+            line-height: 1.3; /* Improved line height for headings */
+        }
+
+        /* Search Form */
+        .search-form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .search-form input[type="text"] {
+            width: calc(65% - 22px); /* Adjust width for padding */
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            vertical-align: middle; /* Align with button */
+            margin-right: 10px; /* Space between input and button */
+            color: var(--text-color); /* Ensure input text color is clear */
+        }
+
+        .search-form input[type="text"]::placeholder {
+            color: var(--light-text-color); /* Make placeholder text clearer */
+            opacity: 0.8; /* Slightly reduce opacity for placeholder */
+        }
+
+        .search-form input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .search-form button {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            vertical-align: middle; /* Align with input */
+        }
+
+        .search-form button:hover {
+            background-color: var(--primary-hover-color);
+            transform: translateY(-1px);
+        }
+
+        /* Summary Section */
+        .summary {
+            background-color: var(--summary-background);
+            border: 1px solid var(--summary-border);
+            padding: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--light-text-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            line-height: 1.6; /* Ensure summary text has good line height */
+        }
+
+        .summary h3 {
+            margin-top: 0;
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+
+        /* Job Cards */
+        .job-card {
+            background-color: var(--card-background);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card h3 {
+            margin-top: 0;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+
+        .job-card p {
+            margin: 8px 0;
+            font-size: 0.96em; /* Slightly adjusted for better readability */
+            color: var(--light-text-color);
+            line-height: 1.6; /* Consistent line height for job details */
+        }
+
+        .job-card strong {
+            color: var(--text-color);
+        }
+
+        .job-card .salary {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-size: 1.05em;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff3cd; /* Light yellow background */
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            color: #856404; /* Dark yellow text */
+        }
+
+        /* Accessibility: Screen Reader Only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* Responsive Adjustments (using traditional methods) */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            .search-form input[type="text"],
+            .search-form button {
+                width: 90%; /* Wider on smaller screens */
+                display: block; /* Stack input and button */
+                margin: 0 auto 15px auto; /* Center and add space */
+            }
+
+            .search-form input[type="text"] {
+                margin-bottom: 15px; /* Add space below input when stacked */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+                font-size: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .search-form input[type="text"],
+            .search-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Semantic AI Job Search</h1>
+
+        <form method="POST" class="search-form" aria-label="Job search form">
+            <label for="query-input" class="sr-only">Enter your job search query</label>
+            <input type="text" id="query-input" name="query" placeholder="e.g., Senior Machine Learning Engineer, Remote Data Scientist" value="{{ query }}" required aria-required="true" autocomplete="off">
+            <button type="submit">Search Jobs</button>
+        </form>
+
+        {% if summary %}
+            <div class="summary" role="region" aria-labelledby="summary-heading">
+                <h3 id="summary-heading">Search Insights:</h3>
+                <p>{{ summary }}</p>
+            </div>
+        {% endif %}
+
+        <div class="job-results" role="main" aria-live="polite" aria-atomic="true">
+            {% if results %}
+                {% for job in results %}
+                    <div class="job-card" aria-labelledby="job-title-{{ loop.index }}">
+                        <h3 id="job-title-{{ loop.index }}">{{ job.job_title }} - {{ job.company_location }}</h3>
+                        <p><strong>Company:</strong> {{ job.company_name }}</p>
+                        <p><strong>Experience Level:</strong> {{ job.experience_level }}</p>
+                        <p><strong>Employment Type:</strong> {{ job.employment_type }}</p>
+                        <p><strong>Remote Ratio:</strong> {{ job.remote_ratio }}%</p>
+                        <p class="salary"><strong>Estimated Salary:</strong> ${{ "{:,.0f}".format(job.salary_usd) }}</p>
+                        <p><strong>Required Skills:</strong> {{ job.required_skills }}</p>
+                    </div>
+                {% endfor %}
+            {% elif query and not summary %}
+                <div class="no-results">
+                    <p>No job postings found matching your search query. Please refine your terms and try again.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
