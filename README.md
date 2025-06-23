@@ -66,7 +66,7 @@ Then open `http://127.0.0.1:5000` in your browser!
 
 ## 🙋‍♀️ About Me
 I'm a Computer Science undergrad at VIT, passionate about Data Science, AI, and building meaningful tech.
-Feel free to connect with me on LinkedIn - https://www.linkedin.com/in/navya-g-a97051314/
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/navya-g-a97051314/)
 
 ## ⭐️ License
 This project is open-source and free to use for educational purposes.
