@@ -4,7 +4,6 @@ from main import search_jobs_with_summary
 
 app = Flask(__name__)
 
-# Load model and data only once at startup
 df, index, model = load_and_prepare_data()
 
 
@@ -29,5 +28,4 @@ def search():
 
 
 if __name__ == '__main__':
-    # Use debug=True for local dev, False for deployment
     app.run(debug=True)
