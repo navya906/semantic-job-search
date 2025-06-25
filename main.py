@@ -72,7 +72,7 @@ def search_jobs_with_summary(user_query, k=20):
 
     distances, indices = temp_index.search(query_vec, k)
 
-    SIMILARITY_THRESHOLD = 0.670
+    SIMILARITY_THRESHOLD = 0.550
     jobs = []
     for i, score in zip(indices[0], distances[0]):
         if score >= SIMILARITY_THRESHOLD:
